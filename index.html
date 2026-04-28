@@ -162,6 +162,13 @@ body.fs-sm { --font-size:14px; }
 body.fs-md { --font-size:16px; }
 body.fs-lg { --font-size:19px; }
 body.fs-xl { --font-size:22px; }
+/* Intro screen text scales with font size setting */
+body.fs-sm .intro-title { font-size:clamp(2.4rem,7vw,5rem); }
+body.fs-lg .intro-title { font-size:clamp(4rem,11vw,7.5rem); }
+body.fs-xl .intro-title { font-size:clamp(4.8rem,13vw,9rem); }
+body.fs-sm .intro-subtitle { font-size:0.75rem; }
+body.fs-lg .intro-subtitle { font-size:1.1rem; }
+body.fs-xl .intro-subtitle { font-size:1.3rem; }
 
 /* ===== SCREENS ===== */
 .screen { display:none; min-height:100vh; }
@@ -199,7 +206,7 @@ body.fs-xl { --font-size:22px; }
 .rain-container { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 .raindrop { position:absolute; width:1px; background:linear-gradient(transparent,rgba(90,181,204,0.2)); animation:rain linear infinite; }
 .intro-content { text-align:center; z-index:1; padding:2rem; animation:fadeInUp 1.2s ease forwards; }
-.intro-badge { display:inline-block; border:2px solid rgba(90,181,204,0.85); padding:0.4rem 1.4rem; font-size:0.7rem; letter-spacing:0.35em; color:rgba(180,230,240,0.95); text-transform:uppercase; margin-bottom:1.5rem; }
+.intro-badge { display:inline-block; border:2px solid rgba(90,181,204,0.85); padding:0.4rem 1.4rem; font-size:calc(var(--font-size,16px) * 0.7 / 16); letter-spacing:0.35em; color:rgba(180,230,240,0.95); text-transform:uppercase; margin-bottom:1.5rem; }
 .intro-title { font-family:'Special Elite',cursive; font-size:clamp(3.2rem,9vw,6.5rem); color:#f0c840; line-height:1; margin-bottom:0.5rem; animation:glow 3s ease infinite; }
 .intro-subtitle { font-size:0.9rem; letter-spacing:0.25em; color:rgba(180,230,240,0.9); text-transform:uppercase; margin-bottom:3rem; }
 .intro-divider { width:180px; height:1px; background:linear-gradient(90deg,transparent,rgba(90,181,204,0.7),transparent); margin:0 auto 3rem; }
@@ -364,6 +371,8 @@ body.fs-xl { --font-size:22px; }
 .phase-label-sm { font-size:0.62rem; letter-spacing:0.12em; color:var(--ink2); margin-bottom:2px; font-weight:700; }
 .pui-pts-display { font-size:0.78rem; color:var(--gold); font-weight:700; white-space:nowrap; }
 .pui-buttons { display:flex; gap:0.5rem; align-items:center; }
+.pui-back-btn { border-color:var(--border2); color:var(--ink2); font-weight:700; }
+.pui-back-btn:hover,.pui-back-btn:focus { background:var(--ink2); color:var(--bg); border-color:var(--ink2); }
 
 /* ===== JOURNAL ===== */
 #journal-panel { display:none; position:fixed; z-index:200; width:330px; min-height:400px; max-height:80vh; background:var(--bg2); border:2px solid var(--border2); box-shadow:0 8px 32px var(--shadow); flex-direction:column; top:80px; right:20px; resize:both; overflow:auto; }
@@ -531,11 +540,10 @@ body.fs-xl { --font-size:22px; }
 <div id="screen-intro" class="screen active" role="main" aria-label="Shipping Sleuths Introduction">
   <div class="rain-container" id="rain" aria-hidden="true"></div>
   <div class="intro-content" id="main-content">
-    <div class="intro-badge" aria-hidden="true">Case Files</div>
     <h1 class="intro-title">Shipping<br>Sleuths</h1>
     <p class="intro-subtitle">The Warehouse Mysteries</p>
     <div class="intro-divider" aria-hidden="true"></div>
-    <button class="btn btn-intro" onclick="showScreen('menu')" aria-label="Open Case Files and begin the game">Open Case Files</button>
+    <button class="btn btn-intro" onclick="showScreen('menu')" aria-label="Start the game">Start Investigation →</button>
   </div>
 </div>
 
@@ -631,7 +639,7 @@ body.fs-xl { --font-size:22px; }
   <div class="pui-buttons">
     <button class="btn btn-sm" onclick="toggleJournal()" aria-label="Open or close field journal" aria-expanded="false" id="journal-toggle-btn">📓 Journal</button>
     <button class="btn btn-sm" id="pui-cm-btn" onclick="cycleColorMode()" aria-label="Cycle color mode" title="Color Mode">☀️</button>
-    <button class="btn btn-sm" onclick="showScreen('menu')" aria-label="Return to case board">← Board</button>
+    <button class="btn btn-sm pui-back-btn" onclick="showScreen('menu')" aria-label="Return to case board">← Case Board</button>
   </div>
 </div>
 
