@@ -154,14 +154,14 @@ body {
   color:var(--ink);
   min-height:100vh;
   overflow-x:hidden;
-  font-size:var(--font-size, 16px);
+  font-size:1rem;
 }
 
 /* ===== FONT SIZE ===== */
-body.fs-sm { --font-size:14px; }
-body.fs-md { --font-size:16px; }
-body.fs-lg { --font-size:19px; }
-body.fs-xl { --font-size:22px; }
+body.fs-sm { font-size:14px; }
+body.fs-md { font-size:16px; }
+body.fs-lg { font-size:19px; }
+body.fs-xl { font-size:22px; }
 /* Intro screen text scales with font size setting */
 body.fs-sm .intro-title { font-size:clamp(2.4rem,7vw,5rem); }
 body.fs-lg .intro-title { font-size:clamp(4rem,11vw,7.5rem); }
@@ -815,6 +815,8 @@ function cycleColorMode() {
 
 function setFontSize(size) {
   state.fontSize = size;
+  const sizes = {sm:'14px', md:'16px', lg:'19px', xl:'22px'};
+  document.documentElement.style.fontSize = sizes[size] || '16px';
   document.body.className = document.body.className.replace(/\bfs-\w+/g,'').trim();
   document.body.classList.add('fs-' + size);
   ['sm','md','lg','xl'].forEach(s => document.getElementById('fs-'+s)?.classList.toggle('active', s===size));
